@@ -9,10 +9,12 @@ package org.soulcodeacademy.helpr.controllers;
 * */
 
 import org.soulcodeacademy.helpr.domain.Cargo; //essa classe está no domain que está no org, e nesse arquivo está reconhecendo
+import org.soulcodeacademy.helpr.domain.dto.CargoDTO;
 import org.soulcodeacademy.helpr.services.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -51,19 +53,21 @@ public class CargoControllers {
     }
 
     //podemos usar o mesmo endpoint para verbos diferentes (até recomendado)
+    //Refatoração do salvar
     @PostMapping("/cargos") //REQUISIÇÃO TIPO POST para /cargos (endpoint)
     //Objeto do JSON convertido em objeto do JAVA:
-    public Cargo salvar(@RequestBody Cargo cargo) { //Permitir o envio de dados pelo POSTMAN, e vai ficar armazenado no cargo
+    public Cargo salvar (@Valid @RequestBody CargoDTO cargo){ //(@RequestBody Cargo cargo)  //@Valid = vai validar o cargo com as regras colocadas
+        // Permitir o envio de dados pelo POSTMAN, e vai ficar armazenado no cargo
         //@RequestBody = extrai o JSON do corpo e converte para o cargo (deserialização)
         Cargo salvo = this.cargoService.salvar(cargo);
-
        return salvo; //A resposta será o cargo inserido
     } //com o cargo salvo, ele vai está armazenado no banco de dados e pode ser visualizado no POSTMAN
 
     /*AULA DIA 04 DE NOV DE 2022*/
 // Mapeia requisições do verbo PUT
     @PutMapping("/cargos/{idCargo}") // /cargos/5
-    public Cargo atualizar(@PathVariable Integer idCargo, @RequestBody Cargo cargo) {
+    public Cargo atualizar(@PathVariable Integer idCargo,
+      /*07 DE NOV*/ @Valid @RequestBody CargoDTO cargo) {
         Cargo atualizado = this.cargoService.atualizar(idCargo, cargo);
         return atualizado; // Resposta para o cliente (cargo atualizado)
     }

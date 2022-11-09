@@ -2,6 +2,8 @@ package org.soulcodeacademy.helpr.domain;
 
 /*AULA DIA 31 DE OUT DE 2022: Criando cargos, inicio do projeto helpr
 *
+* Domain é a package onde fica as entidades.
+ *
 * Toda entidade é uma classe:
 * Precisa ter um construtor vazio
 * Pode ter outros construtores para criar manualmente os objetos
@@ -91,3 +93,11 @@ String - String
 Null - null (vazio)
 *
 * */
+
+/*ORDEM DO BACKEND
+ * 1 - Cria a Entidade
+ * 2 - Repository
+ * 3- DTO
+ * 4 - Service
+ * 5 - Controller
+ * */

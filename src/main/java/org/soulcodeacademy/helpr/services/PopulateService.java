@@ -2,21 +2,28 @@ package org.soulcodeacademy.helpr.services;
 
 /*AULA DIA 01 DE NOV 2022
 *
+* Entidade de testes
 * O objetivo dessa classe é inserir no banco de dados fictícios para testes.
 *
 * */
 
 import org.soulcodeacademy.helpr.domain.Cargo;
+import org.soulcodeacademy.helpr.domain.Funcionario;
 import org.soulcodeacademy.helpr.repositories.CargoRepository;
+import org.soulcodeacademy.helpr.repositories.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-// Torna o objeto de PopulateService disponível para toda a aplicação (global)
+
 @Service // indica para o Spring que esta classe será gerenciada por ele
-public class PopulateService {
+public class PopulateService {// Torna o objeto de PopulateService disponível para toda a aplicação (global)
     @Autowired // injetar o objeto direto na classe
     private CargoRepository cargoRepository; //cargoRepository (atributo guar o objeto da interface) pode ser qualquer nome (rem esse nome pra saber que é da interface CargoRepository
     //Autowired vai ver se CargoRepository (interface)  está dentro da dependencia e adc no container
+
+    /*AULA DIA 08 DE NOV DE 2022*/
+    @Autowired //Precisa colocar pra entidade Funcionario tb
+    private FuncionarioRepository funcionarioRepository;
 
     //Método
     public void populate() {
@@ -30,6 +37,13 @@ public class PopulateService {
         this.cargoRepository.save(c1); // INSERT INTO (MySQL)
         this.cargoRepository.save(c2);
         this.cargoRepository.save(c3);
+
+        /*AULA DIA 08 DE NOV DE 2022*/
+        Funcionario f1 = new Funcionario(null, "Renato Pereira", "renato.pereira@gmail.com", "68258098144", "12345", null, c1); //c1 = cargo que ele vai receber
+        Funcionario f2 = new Funcionario(null, "Victor Icoma", "victor.icoma@gmail.com","688758098144", "67890", null, c2);
+
+        this.funcionarioRepository.save(f1);
+        this.funcionarioRepository.save(f2);
     }
 }
 
